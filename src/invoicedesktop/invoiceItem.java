@@ -21,7 +21,7 @@ public class invoiceItem   {
     public invoiceItem() {
         // loadFromFile();
     }
-    public invoiceItem(String itemName, int itemCount, double itemPrice, invoice invoice) {
+    public invoiceItem(String itemName,  double itemPrice,int itemCount, invoice invoice) {
         this.itemName = itemName;
         this.itemCount = itemCount;
         this.itemPrice = itemPrice;
