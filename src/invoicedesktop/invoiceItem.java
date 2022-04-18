@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class invoiceItem   {
     //private static String invoiceHeader =invoice.getInvoiceHeader();
-   // private static String invoiceLine ;
+      //private   String invoiceLine ;
 
     csvReadWrite csvRW = new csvReadWrite();
     public static ArrayList<invoiceItem> invoiceItems = new ArrayList<invoiceItem>();
@@ -65,46 +65,6 @@ public class invoiceItem   {
         return this.itemPrice*this.itemCount;
     }
 
-
-
-
-//    private void loadFromFile() {
-//
-//        invoices =  csvRW.read(invoice.getInvoiceHeader(),invoice.getInvoiceLine());
-//
-//        // invoices = (ArrayList<invoice>)(Object) csvRW.read(invoiceHeader);
-//
-//    }
-    //    public ArrayList<invoiceItem> returnallinvoicesItems(){
-//        loadFromFile();
-//        for(invoice x: invoices){
-//            invoiceItemsLists.add(x.getInvoiceItems());
-//            for(invoiceItem y : x.getInvoiceItems()){
-//                invoiceItems.add(y);
-//            }
-//        }
-//        return invoiceItems;
-//    }
-//    public ArrayList<ArrayList<invoiceItem>> returnallinvoicesItemsLists(){
-//        invoices =  csvRW.read(invoice.getInvoiceHeader(),invoice.getInvoiceLine());
-//        for(invoice x: invoices){
-//            invoiceItemsLists.add(x.getInvoiceItems());
-////            for(invoiceItem y : x.getInvoiceItems())
-////                invoiceItems.add(y);
-//        }
-//        return invoiceItemsLists;
-//    }
-
-    //    public void addItem(invoiceItem item){
-//    invoiceItems.add(item);
-//    }
-//    public void deleteInvoiceItems(int id){
-//        for(int i =0 ;i<invoiceItems.size();i++){
-//            if(invoiceItems.get(i).invoice.getInvoiceNO() == id);
-//            invoiceItems.remove(i);
-//        }
-//
-//    }
     private String getItemData() {
         return invoice.getInvoiceNO() + "," + this.itemName + "," + this.itemPrice + "," + this.itemCount;
     }
@@ -118,9 +78,9 @@ public class invoiceItem   {
         }
     }
 
-    @Override
-    public String toString() {
-        return  invoice.getInvoiceNO() + " " + itemName +  " " + itemCount + "  " + itemPrice + "  " + calTotalItemPrice() +"\n" ;
-    }
+//    @Override
+//    public String toString() {
+//        return  invoice.getInvoiceNO() + " " + itemName +  " " + itemCount + "  " + itemPrice + "  " + calTotalItemPrice() +"\n" ;
+//    }
 
 }

@@ -36,7 +36,6 @@ public class invoice  {
 
 
    public invoice(){
-//     loadFromFile();
 
     }
 
@@ -84,12 +83,9 @@ public class invoice  {
 
 
 
-//    private void loadFromFile() {
-//        invoices =  csvRW.read(invoiceHeader,invoiceLine);
-//    }
+
     public double getItemsTotalPrice(){
         double price=0;
-      //  loadFromFile();
       if(invoiceItems.size()==0){
           return 0;
       }
@@ -102,7 +98,6 @@ public class invoice  {
     }
 
     public ArrayList<invoice> returnAllInvoices() {
-//        loadFromFile();
      invoices =  csvRW.read(invoiceHeader,invoiceLine);
 
         return invoices;
@@ -135,7 +130,6 @@ public class invoice  {
 
     }
     private String getInvoiceData() {
-//        return this.invoiceNO + "," + this.date + "," + this.clientName + "," + this.getItemsTotalPrice() ;
         return this.invoiceNO + "," + this.date + "," + this.clientName ;
 
     }
@@ -148,9 +142,9 @@ public class invoice  {
     }
 
 
-    @Override
-    public String toString() {
-        return  invoiceNO + " " + date +  " " + clientName + "  " + getItemsTotalPrice() + "\n" ;
-    }
+//    @Override
+//    public String toString() {
+//        return  invoiceNO + " " + date +  " " + clientName + "  " + getItemsTotalPrice() + "\n" ;
+//    }
 
 }

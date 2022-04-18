@@ -6,6 +6,7 @@ package gui;
 
 import invoicedesktop.invoice;
 import invoicedesktop.invoiceItem;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,34 +28,25 @@ import javax.swing.table.TableModel;
             return "csv files (*.csv)";
         }
     }
-//class TableData extends javax.swing.JTable.AccessibleJComponent {
-////        @Override
-////        public boolean accept(File file) {
-////            return file.isDirectory() || file.getAbsolutePath().endsWith(".csv");
-////        }
-////        @Override
-////        public String getDescription() {
-////            
-////            return "csv files (*.csv)";
-//    
-////        
-//    }
+
 public class NewJFrame extends javax.swing.JFrame {
+           File   headerFile = new File("/");
+            File headerLine = new File("/");
                ArrayList<invoice> allInvoices = new ArrayList<invoice>();
                ArrayList<ArrayList<invoiceItem>> allItems =new ArrayList<ArrayList<invoiceItem>>();
                invoice in =new invoice();
                invoiceItem item =new invoiceItem();
+        DefaultTableModel invoiceModel;
+        DefaultTableModel invoiceItemModel;
 
 
-
-//DefaultTableModel invoiceModel =null;
     /**
      * Creates new form NewJFrame
      */
     
     public NewJFrame() {
         initComponents();
-      //  showInvoices();
+        
     }
 
     /**
@@ -100,6 +92,8 @@ public class NewJFrame extends javax.swing.JFrame {
         deleteItemButton = new javax.swing.JButton();
         invoiceNumber = new javax.swing.JTextField();
         invoiceTotalPrice = new javax.swing.JTextField();
+        saveUpdates = new javax.swing.JButton();
+        cancelChanges = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadFile = new javax.swing.JMenu();
         load = new javax.swing.JMenuItem();
@@ -268,7 +262,11 @@ public class NewJFrame extends javax.swing.JFrame {
             new String [] {
                 "invoice number", "invoice date", "customer name", "total price"
             }
-        ));
+        ){
+            public boolean isCellEditable(int row,int column){
+                return false;
+            }}
+        );
         invoicesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 invoicesTableMouseClicked(evt);
@@ -283,164 +281,191 @@ public class NewJFrame extends javax.swing.JFrame {
             new String [] {
                 "item name", "item price", "item count", "total price"
             }
-        ));
-        jScrollPane2.setViewportView(invoiceItemsTable);
-
-        invoiceNumberLabel.setText("invoice number");
-
-        invoiceDateLabel.setText("invoice date");
-
-        customerNameLabel.setText("customer name");
-
-        invoiceTotalLabel.setText("invoice total");
-
-        invoiceDate.setEditable(false);
-        invoiceDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                invoiceDateActionPerformed(evt);
+        ){
+            public boolean isCellEditable(int row , int column){
+                return false;
             }
-        });
+        }
+    );
+    jScrollPane2.setViewportView(invoiceItemsTable);
 
-        customerName.setEditable(false);
+    invoiceNumberLabel.setText("invoice number");
 
-        createInvoiceButton.setText("create invoice");
-        createInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInvoiceButtonActionPerformed(evt);
-            }
-        });
+    invoiceDateLabel.setText("invoice date");
 
-        deleteInvoiceButton.setText("delete invoice");
-        deleteInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteInvoiceButtonActionPerformed(evt);
-            }
-        });
+    customerNameLabel.setText("customer name");
 
-        addItemButton.setText("add item");
-        addItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addItemButtonActionPerformed(evt);
-            }
-        });
+    invoiceTotalLabel.setText("invoice total");
 
-        deleteItemButton.setText("delete item");
-        deleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteItemButtonActionPerformed(evt);
-            }
-        });
+    invoiceDate.setEditable(false);
+    invoiceDate.setBackground(new java.awt.Color(204, 204, 204));
+    invoiceDate.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            invoiceDateActionPerformed(evt);
+        }
+    });
 
-        invoiceNumber.setEditable(false);
-        invoiceNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                invoiceNumberActionPerformed(evt);
-            }
-        });
+    customerName.setEditable(false);
+    customerName.setBackground(new java.awt.Color(204, 204, 204));
 
-        invoiceTotalPrice.setEditable(false);
+    createInvoiceButton.setText("create invoice");
+    createInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            createInvoiceButtonActionPerformed(evt);
+        }
+    });
 
-        loadFile.setText("File");
-        loadFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadFileActionPerformed(evt);
-            }
-        });
+    deleteInvoiceButton.setText("delete invoice");
+    deleteInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            deleteInvoiceButtonActionPerformed(evt);
+        }
+    });
 
-        load.setText("load file");
-        load.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadActionPerformed(evt);
-            }
-        });
-        loadFile.add(load);
+    addItemButton.setText("add item");
+    addItemButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            addItemButtonActionPerformed(evt);
+        }
+    });
 
-        saveFile.setText("save file");
-        saveFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveFileActionPerformed(evt);
-            }
-        });
-        loadFile.add(saveFile);
+    deleteItemButton.setText("delete item");
+    deleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            deleteItemButtonActionPerformed(evt);
+        }
+    });
 
-        jMenuBar1.add(loadFile);
+    invoiceNumber.setEditable(false);
+    invoiceNumber.setBackground(new java.awt.Color(204, 204, 204));
+    invoiceNumber.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            invoiceNumberActionPerformed(evt);
+        }
+    });
 
-        setJMenuBar(jMenuBar1);
+    invoiceTotalPrice.setEditable(false);
+    invoiceTotalPrice.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(invoiceDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(invoiceNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(invoiceDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customerName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(invoiceNumber))
-                        .addGap(111, 111, 111))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(createInvoiceButton)
-                .addGap(71, 71, 71)
-                .addComponent(deleteInvoiceButton)
-                .addGap(129, 129, 129)
-                .addComponent(addItemButton)
-                .addGap(89, 89, 89)
-                .addComponent(deleteItemButton)
-                .addGap(0, 69, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(invoiceNumberLabel)
-                            .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(invoiceDateLabel)
-                            .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(customerName)
-                            .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    saveUpdates.setText("save");
+    saveUpdates.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            saveUpdatesActionPerformed(evt);
+        }
+    });
+
+    cancelChanges.setText("cancel");
+
+    loadFile.setText("File");
+    loadFile.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            loadFileActionPerformed(evt);
+        }
+    });
+
+    load.setText("load file");
+    load.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            loadActionPerformed(evt);
+        }
+    });
+    loadFile.add(load);
+
+    saveFile.setText("save file");
+    saveFile.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            saveFileActionPerformed(evt);
+        }
+    });
+    loadFile.add(saveFile);
+
+    jMenuBar1.add(loadFile);
+
+    setJMenuBar(jMenuBar1);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invoiceDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invoiceNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(invoiceDate, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(customerName, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addComponent(invoiceNumber))
+                    .addGap(111, 111, 111))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(29, Short.MAX_VALUE))))
+        .addGroup(layout.createSequentialGroup()
+            .addGap(38, 38, 38)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(saveUpdates)
+                .addGroup(layout.createSequentialGroup()
                     .addComponent(createInvoiceButton)
+                    .addGap(71, 71, 71)
+                    .addComponent(deleteInvoiceButton)
+                    .addGap(129, 129, 129)
+                    .addComponent(addItemButton)))
+            .addGap(89, 89, 89)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(deleteItemButton)
+                .addComponent(cancelChanges))
+            .addGap(0, 0, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(deleteInvoiceButton)
-                        .addComponent(addItemButton)
-                        .addComponent(deleteItemButton)))
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
+                        .addComponent(invoiceNumberLabel)
+                        .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(invoiceDateLabel)
+                        .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(customerName)
+                        .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(createInvoiceButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteInvoiceButton)
+                    .addComponent(addItemButton)
+                    .addComponent(deleteItemButton)))
+            .addGap(32, 32, 32)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(saveUpdates)
+                .addComponent(cancelChanges))
+            .addContainerGap(39, Short.MAX_VALUE))
+    );
 
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
    private void showInvoices(String header ,String line){
-       DefaultTableModel invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
                          in.setInvoiceHeader(header);
                         in.setInvoiceLine(line);
                         allInvoices =in.returnAllInvoices();
@@ -462,7 +487,7 @@ public class NewJFrame extends javax.swing.JFrame {
   
     void selectedInvoiceItems(int index){
        
-       DefaultTableModel invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+        invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
        invoiceItemModel.setRowCount(0);
 
             Object []rowData =new Object[4];
@@ -481,7 +506,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-      File   headerFile = fileChooser.getSelectedFile();
+         headerFile = fileChooser.getSelectedFile();
 //         JOptionPane.showMessageDialog(null, "<the invoice file added successfully.>", "Alert", JOptionPane.INFORMATION_MESSAGE);        
          JOptionPane.showMessageDialog(null, "<select the  invoice items file>", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
@@ -490,7 +515,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
 //                JOptionPane.showMessageDialog(null, "<the invoice items file added successfully.>", "Alert", JOptionPane.INFORMATION_MESSAGE);        
 
-                      File    headerLine = fileChooser.getSelectedFile();
+                          headerLine = fileChooser.getSelectedFile();
                       showInvoices(headerFile.getAbsolutePath(),headerLine.getAbsolutePath());
                       System.out.println(headerFile.getAbsoluteFile());
                        
@@ -519,6 +544,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void invoicesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoicesTableMouseClicked
         // TODO add your handling code here:
+             invoiceDate.setEditable(true);
+             invoiceDate.setBackground(Color.WHITE);
+             customerName.setEditable(true);
+             customerName.setBackground(Color.WHITE);
+
+              
         int index = invoicesTable.getSelectedRow();
          TableModel model = invoicesTable.getModel();
          String inNum = model.getValueAt(index, 0).toString();
@@ -546,13 +577,21 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_setItemNameActionPerformed
 
     private void createInvoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInvoiceButtonActionPerformed
-        // TODO add your handling code here:
-       addInvoiceDialog.setVisible(true);
+          if(!headerFile.isFile()||!headerLine.isFile()){
+           JOptionPane.showMessageDialog(null, "<please upload files first>", "Alert", JOptionPane.QUESTION_MESSAGE);        
+
+          }     
+         else if(!headerFile.isFile()&&!headerLine.isFile()){
+           JOptionPane.showMessageDialog(null, "<please upload files first>", "Alert", JOptionPane.QUESTION_MESSAGE);        
+
+          }     
+         
+        else{ addInvoiceDialog.setVisible(true);}
 
 
     }//GEN-LAST:event_createInvoiceButtonActionPerformed
 void creatingInvoice(String date,String clientName){
-      DefaultTableModel invoiceTable = (DefaultTableModel) invoicesTable.getModel();
+       invoiceModel = (DefaultTableModel) invoicesTable.getModel();
  
 
        if(  date.equals("") || clientName.equals("")){
@@ -561,19 +600,14 @@ void creatingInvoice(String date,String clientName){
          JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);        
           }
        else if(!date.equals("") &&!clientName.equals("")){
-           //System.out.println("hiiiiiiiiiiiii");
            ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
            int size  =allInvoices.size();
            size++;
-        //   System.out.println(size);
 
            invoice newIn =new invoice(size,date,clientName);
-//           invoiceItem item = new invoiceItem("mahmoud",2,2,newIn);
-//           items.add(item);
            newIn.setInvoiceItems(items);        
            allInvoices.add(newIn);
            allItems.add(items);
-                    //TableModel model = invoicesTable.getModel();
 
                  Object []rowData =new Object[4];
 
@@ -581,7 +615,7 @@ void creatingInvoice(String date,String clientName){
                  rowData[1] = String.valueOf(newIn.getDate());
                  rowData[2] = String.valueOf(newIn.getClientName());
                  rowData[3] = String.valueOf(newIn.getItemsTotalPrice());
-                 invoiceTable.addRow(rowData);
+                 invoiceModel.addRow(rowData);
                  addInvoiceDialog.setVisible(false);
     }
 }
@@ -595,13 +629,11 @@ void creatingInvoice(String date,String clientName){
                 setInvoiceDate.setText("");
                  setClientName.setText("");
 
-//       else{
-//           addInvoieHeadLabel.setText("you must enter invoice data");
-//       }
+
     }//GEN-LAST:event_submitAddingInvoiceActionPerformed
 void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
-       DefaultTableModel invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
-       DefaultTableModel invoiceTableModel = (DefaultTableModel) invoicesTable.getModel();
+        invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
 
        // int index = invoicesTable.getSelectedRow();
 
@@ -616,7 +648,6 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                    double price = Double.parseDouble(itemPrice);
                       
               invoiceItem it =new invoiceItem(itemName,price,count,allInvoices.get(index));
-                 // it.getInvoice.setInvoiceNO(index+1);
                    allItems.get(index).add(it);
 
                  Object []rowData =new Object[4];
@@ -627,15 +658,9 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                  rowData[3] = String.valueOf(it.calTotalItemPrice());
                  invoiceItemModel.addRow(rowData);
                  String pr = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
-                // Object []update =new Object[4];
                  invoiceTotalPrice.setText(pr);
-                 invoiceTableModel.setValueAt(pr,index,3);
-//                 update[0] = String.valueOf(allInvoices.get(index).getInvoiceNO());
-//                 update[1] = String.valueOf(allInvoices.get(index).getDate());
-//                  update[2] = String.valueOf(allInvoices.get(index).getClientName());
-//                update[3] = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
-//                invoiceTable.removeRow(index);
-//                invoiceTable.addRow(update);
+                 invoiceModel.setValueAt(pr,index,3);
+            
     }
 
 }
@@ -668,8 +693,8 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
 
     private void deleteInvoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteInvoiceButtonActionPerformed
         // TODO add your handling code here:
-               DefaultTableModel invoiceModel = (DefaultTableModel) invoicesTable.getModel();
-               DefaultTableModel invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+                invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+                invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
 
 
          if(invoicesTable.getSelectionModel().isSelectionEmpty()) {
@@ -681,16 +706,21 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                             invoiceModel.removeRow(index);
                             allInvoices.remove(index);
                             allItems.remove(index);
-                            //invoiceModel.removeRow(0);
                             invoiceItemModel.setRowCount(0);
+                            invoiceNumber.setText("");
+                            invoiceDate.setText("");
+                            customerName.setText("");
+                            invoiceTotalPrice.setText("");
+
+                            
 
               }
     }//GEN-LAST:event_deleteInvoiceButtonActionPerformed
 
     private void deleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemButtonActionPerformed
         // TODO add your handling code here:
-            DefaultTableModel invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
-            DefaultTableModel invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+             invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+             invoiceModel = (DefaultTableModel) invoicesTable.getModel();
 
 
          if(invoiceItemsTable.getSelectionModel().isSelectionEmpty()) {
@@ -721,6 +751,10 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
         // TODO add your handling code here:
                 addInvoiceDialog.setVisible(false);
     }//GEN-LAST:event_cancelAddInvoiceActionPerformed
+
+    private void saveUpdatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUpdatesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveUpdatesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -767,6 +801,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JDialog addItemDialog;
     private javax.swing.JButton addingItem;
     private javax.swing.JButton cancelAddInvoice;
+    private javax.swing.JButton cancelChanges;
     private javax.swing.JButton canelAddItem;
     private javax.swing.JButton createInvoiceButton;
     private javax.swing.JTextField customerName;
@@ -793,6 +828,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JMenuItem load;
     private javax.swing.JMenu loadFile;
     private javax.swing.JMenuItem saveFile;
+    private javax.swing.JButton saveUpdates;
     private javax.swing.JTextField setClientName;
     private javax.swing.JTextField setInvoiceDate;
     private javax.swing.JTextField setItemCount;

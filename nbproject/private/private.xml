@@ -5,6 +5,8 @@
         <group>
             <file>file:/D:/invoiceDesktop/src/gui/NewJFrame.java</file>
             <file>file:/D:/invoiceDesktop/src/invoicedesktop/invoice.java</file>
+            <file>file:/D:/invoiceDesktop/src/invoicedesktop/csvReadWrite.java</file>
+            <file>file:/D:/invoiceDesktop/src/invoicedesktop/invoiceItem.java</file>
         </group>
     </open-files>
 </project-private>
