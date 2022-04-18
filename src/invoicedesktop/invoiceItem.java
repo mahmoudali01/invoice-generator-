@@ -68,13 +68,13 @@ public class invoiceItem   {
 
 
 
-    private void loadFromFile() {
-
-        invoices =  csvRW.read(invoice.getInvoiceHeader(),invoice.getInvoiceLine());
-
-        // invoices = (ArrayList<invoice>)(Object) csvRW.read(invoiceHeader);
-
-    }
+//    private void loadFromFile() {
+//
+//        invoices =  csvRW.read(invoice.getInvoiceHeader(),invoice.getInvoiceLine());
+//
+//        // invoices = (ArrayList<invoice>)(Object) csvRW.read(invoiceHeader);
+//
+//    }
     //    public ArrayList<invoiceItem> returnallinvoicesItems(){
 //        loadFromFile();
 //        for(invoice x: invoices){
@@ -85,15 +85,15 @@ public class invoiceItem   {
 //        }
 //        return invoiceItems;
 //    }
-    public ArrayList<ArrayList<invoiceItem>> returnallinvoicesItemsLists(){
-        loadFromFile();
-        for(invoice x: invoices){
-            invoiceItemsLists.add(x.getInvoiceItems());
-//            for(invoiceItem y : x.getInvoiceItems())
-//                invoiceItems.add(y);
-        }
-        return invoiceItemsLists;
-    }
+//    public ArrayList<ArrayList<invoiceItem>> returnallinvoicesItemsLists(){
+//        invoices =  csvRW.read(invoice.getInvoiceHeader(),invoice.getInvoiceLine());
+//        for(invoice x: invoices){
+//            invoiceItemsLists.add(x.getInvoiceItems());
+////            for(invoiceItem y : x.getInvoiceItems())
+////                invoiceItems.add(y);
+//        }
+//        return invoiceItemsLists;
+//    }
 
     //    public void addItem(invoiceItem item){
 //    invoiceItems.add(item);

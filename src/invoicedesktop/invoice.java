@@ -84,12 +84,17 @@ public class invoice  {
 
 
 
-    private void loadFromFile() {
-        invoices =  csvRW.read(invoiceHeader,invoiceLine);
-    }
+//    private void loadFromFile() {
+//        invoices =  csvRW.read(invoiceHeader,invoiceLine);
+//    }
     public double getItemsTotalPrice(){
         double price=0;
-        loadFromFile();
+      //  loadFromFile();
+      if(invoiceItems.size()==0){
+          return 0;
+      }
+           invoices =  csvRW.read(invoiceHeader,invoiceLine);
+
         for (int i = 0; i < invoiceItems.size(); i++){
             price+=(invoiceItems.get(i).calTotalItemPrice());
         }
@@ -97,7 +102,9 @@ public class invoice  {
     }
 
     public ArrayList<invoice> returnAllInvoices() {
-        loadFromFile();
+//        loadFromFile();
+     invoices =  csvRW.read(invoiceHeader,invoiceLine);
+
         return invoices;
     }
     public String[][] returnAllInvoicesAsArray() {

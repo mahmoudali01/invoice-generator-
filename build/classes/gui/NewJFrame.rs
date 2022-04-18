@@ -1,9 +1,0 @@
-gui.NewJFrame$7
-gui.NewJFrame$6
-gui.NewJFrame$5
-gui.NewJFrame$4
-gui.NewJFrame
-gui.MyCustomFilter
-gui.NewJFrame$3
-gui.NewJFrame$2
-gui.NewJFrame$1
