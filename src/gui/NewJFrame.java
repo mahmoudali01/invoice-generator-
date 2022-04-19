@@ -709,11 +709,11 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
           }
        else if(!itemName.equals("") &&!itemPrice.equals("")&&!itemCount.equals("")){
                    int index = invoicesTable.getSelectedRow();
-                   int count = Integer.parseInt(itemCount);
+                   
+                  try{ int count = Integer.parseInt(itemCount);
                    double price = Double.parseDouble(itemPrice);
-                      
-              invoiceItem it =new invoiceItem(itemName,price,count,allInvoices.get(index));
-                   allItems.get(index).add(it);
+                                 invoiceItem it =new invoiceItem(itemName,price,count,allInvoices.get(index));
+                                   allItems.get(index).add(it);
 
                  Object []rowData =new Object[4];
 
@@ -722,13 +722,21 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                  rowData[2] = String.valueOf(it.getItemCount());
                  rowData[3] = String.valueOf(it.calTotalItemPrice());
                  invoiceItemModel.addRow(rowData);
-                 String pr = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
+                  String pr = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
                  invoiceTotalPrice.setText(pr);
                  invoiceModel.setValueAt(pr,index,3);
                 addItemDialog.setVisible(false);
                  setItemName.setText("");
                  setItemCount.setText("");
                  setItemPrice.setText("");
+
+                  }catch(Exception e){
+                                JOptionPane.showMessageDialog(null, "enter the right values for price and count", "Alert", JOptionPane.ERROR_MESSAGE);        
+
+                   }
+                      
+                 
+                
 
             
     }
@@ -755,7 +763,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
         itemPrice =setItemPrice.getText();
 
                
-                addItemToInvoice(itemName,itemCount,itemPrice);
+                addItemToInvoice(itemName,itemPrice,itemCount);
                 
 
     }//GEN-LAST:event_addingItemActionPerformed
@@ -888,7 +896,9 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
       char c = e.getKeyChar();
       if (!((c >= '0') && (c <= '9') ||
          (c == KeyEvent.VK_BACK_SPACE) ||
-         (c == KeyEvent.VK_DELETE))||e.getKeyChar() == '.') {
+         (c == KeyEvent.VK_DELETE) ||
+          c == KeyEvent.VK_DECIMAL ||
+          c == KeyEvent.VK_PERIOD)) {
         getToolkit().beep();
         e.consume();
       }
