@@ -101,7 +101,7 @@ public class NewJFrame extends javax.swing.JFrame {
         deleteItemButton = new javax.swing.JButton();
         invoiceNumber = new javax.swing.JTextField();
         invoiceTotalPrice = new javax.swing.JTextField();
-        invoiceDate = new com.toedter.calendar.JDateChooser();
+        invoiceDate = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadFile = new javax.swing.JMenu();
         load = new javax.swing.JMenuItem();
@@ -346,7 +346,8 @@ public class NewJFrame extends javax.swing.JFrame {
     invoiceTotalPrice.setEditable(false);
     invoiceTotalPrice.setBackground(new java.awt.Color(204, 204, 204));
 
-    invoiceDate.setEnabled(false);
+    invoiceDate.setEditable(false);
+    invoiceDate.setBackground(new java.awt.Color(204, 204, 204));
 
     loadFile.setText("File");
     loadFile.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +396,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(customerName, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                         .addComponent(invoiceNumber)
-                        .addComponent(invoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(invoiceDate))
                     .addGap(111, 111, 111))
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,11 +538,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void invoicesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoicesTableMouseClicked
         // TODO add your handling code here:
-             invoiceDate.setEnabled(true);
-
-             invoiceDate.setBackground(Color.WHITE);
-             customerName.setEditable(true);
-             customerName.setBackground(Color.WHITE);
+//             invoiceDate.setEnabled(true);
+//
+//             invoiceDate.setBackground(Color.WHITE);
+//             customerName.setEditable(true);
+//             customerName.setBackground(Color.WHITE);
 
               
         int index = invoicesTable.getSelectedRow();
@@ -549,19 +550,21 @@ public class NewJFrame extends javax.swing.JFrame {
          String inNum = model.getValueAt(index, 0).toString();
           //SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
 
-         String dd = model.getValueAt(index, 1).toString();
-         // sdf.format(date);
-          Date date = null;
-               try {
-                   date = new SimpleDateFormat("dd-mm-yyyy").parse(dd);
-               } catch (ParseException ex) {
-                   Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-               }
+        String date = model.getValueAt(index, 1).toString();
+//         // sdf.format(date);
+//          Date date = null;
+//               try {
+//                   date = new SimpleDateFormat("dd-mm-yyyy").parse(dd);
+//               } catch (ParseException ex) {
+//                   Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+//               }
+       // Date date = new SimpleDateFormat("dd-MM-yyyy").parse((String)model.getValueAt(index, 1).toString());
+
 
          String clientName= model.getValueAt(index, 2).toString();
          String total =model.getValueAt(index, 3).toString();
          invoiceNumber.setText(inNum);
-         invoiceDate.setDate(date);
+         invoiceDate.setText(date);
          customerName.setText(clientName);
          invoiceTotalPrice.setText(total);
          selectedInvoiceItems(index);
@@ -617,14 +620,15 @@ void creatingInvoice(String date,String clientName){
 }
     private void submitAddingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAddingInvoiceActionPerformed
         // TODO add your handling code here:
-    String clientName,date;
- SimpleDateFormat sdf =  new SimpleDateFormat("d/M/yyyy");
+         String clientName,date;
+          SimpleDateFormat sdf =  new SimpleDateFormat("d/M/yyyy");
           if(setInvoiceDate.getDate() == null){
               date =null;
-          }
+           }
               
         else{
            date = sdf.format(setInvoiceDate.getDate());
+          // System.out.println(date);
          }
        
         //    date = setInvoiceDate.getDate();
@@ -716,7 +720,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                             allItems.remove(index);
                             invoiceItemModel.setRowCount(0);
                             invoiceNumber.setText("");
-                            invoiceDate.setDate(null);
+                            invoiceDate.setText("");
                             customerName.setText("");
                             invoiceTotalPrice.setText("");
 
@@ -816,7 +820,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JButton deleteInvoiceButton;
     private javax.swing.JButton deleteItemButton;
     private javax.swing.JFileChooser fileChooser;
-    private com.toedter.calendar.JDateChooser invoiceDate;
+    private javax.swing.JTextField invoiceDate;
     private javax.swing.JLabel invoiceDateLabel;
     private javax.swing.JTable invoiceItemsTable;
     private javax.swing.JTextField invoiceNumber;
