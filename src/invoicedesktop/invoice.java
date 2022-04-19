@@ -102,33 +102,24 @@ public class invoice  {
 
         return invoices;
     }
-    public String[][] returnAllInvoicesAsArray() {
-     String [][]data = null;
-        for (int i = 0; i <= invoices.size(); i++)
-      {
-        data[i][0] = String.valueOf(invoices.get(i).getInvoiceNO());
-        data[i][1] = String.valueOf(invoices.get(i).getDate());
-        data[i][2] = String.valueOf(invoices.get(i).getClientName());
-        data[i][3] = String.valueOf(invoices.get(i).getItemsTotalPrice());
-     }
-       for (int i = 0; i <= invoices.size(); i++){
-             for (int j = 0; j <= invoices.size(); j++){
-             System.out.print(data[i][j]);
-             }
-
-        }
-       return data;
-    }
-    public void addInvoice(invoice in){
-        invoices.add(in);
-    }
-    public void deleteInvoice(int id){
-        for(int i =0 ;i<invoices.size();i++){
-            if(invoices.get(i).invoiceNO == id);
-            invoices.remove(i);
-        }
-
-    }
+//    public String[][] returnAllInvoicesAsArray() {
+//     String [][]data = null;
+//        for (int i = 0; i <= invoices.size(); i++)
+//      {
+//        data[i][0] = String.valueOf(invoices.get(i).getInvoiceNO());
+//        data[i][1] = String.valueOf(invoices.get(i).getDate());
+//        data[i][2] = String.valueOf(invoices.get(i).getClientName());
+//        data[i][3] = String.valueOf(invoices.get(i).getItemsTotalPrice());
+//     }
+//       for (int i = 0; i <= invoices.size(); i++){
+//             for (int j = 0; j <= invoices.size(); j++){
+//             System.out.print(data[i][j]);
+//             }
+//
+//        }
+//       return data;
+//    }
+//   
     private String getInvoiceData() {
         return this.invoiceNO + "," + this.date + "," + this.clientName ;
 
@@ -142,9 +133,9 @@ public class invoice  {
     }
 
 
-//    @Override
-//    public String toString() {
-//        return  invoiceNO + " " + date +  " " + clientName + "  " + getItemsTotalPrice() + "\n" ;
-//    }
+    @Override
+    public String toString() {
+        return  invoiceNO + " " + date +  " " + clientName + "  " + getItemsTotalPrice() + "\n" ;
+    }
 
 }

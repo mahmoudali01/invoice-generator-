@@ -78,9 +78,9 @@ public class invoiceItem   {
         }
     }
 
-//    @Override
-//    public String toString() {
-//        return  invoice.getInvoiceNO() + " " + itemName +  " " + itemCount + "  " + itemPrice + "  " + calTotalItemPrice() +"\n" ;
-//    }
+    @Override
+    public String toString() {
+        return  invoice.getInvoiceNO() + " " + itemName +  " " + itemCount + "  " + itemPrice + "  " + calTotalItemPrice() +"\n" ;
+    }
 
 }

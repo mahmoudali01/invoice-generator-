@@ -480,6 +480,7 @@ public class NewJFrame extends javax.swing.JFrame {
     pack();
     }// </editor-fold>//GEN-END:initComponents
    private void showInvoices(String header ,String line){
+       try{
         invoiceModel = (DefaultTableModel) invoicesTable.getModel();
                          in.setInvoiceHeader(header);
                         in.setInvoiceLine(line);
@@ -503,6 +504,8 @@ public class NewJFrame extends javax.swing.JFrame {
                   rowData[2] = String.valueOf(allInvoices.get(i).getClientName());
                 rowData[3] = String.valueOf(allInvoices.get(i).getItemsTotalPrice());
               invoiceModel.addRow(rowData);
+              }}catch(Exception e){
+              System.out.println("some invoices has no items yet");
               }
 
     }
@@ -511,7 +514,7 @@ public class NewJFrame extends javax.swing.JFrame {
        
         invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
        invoiceItemModel.setRowCount(0);
-
+try{
             Object []rowData =new Object[4];
                 for (int i = 0; i <= allItems.get(index).size(); i++)
                {
@@ -520,7 +523,10 @@ public class NewJFrame extends javax.swing.JFrame {
                   rowData[2] = String.valueOf(allItems.get(index).get(i).getItemCount());
                 rowData[3] = String.valueOf(allItems.get(index).get(i).calTotalItemPrice());
               invoiceItemModel.addRow(rowData);
+        }}catch(Exception e){
+        System.out.println("inoice has no added items yet");
         }
+
    }
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
         // TODO add your handling code here:
@@ -578,7 +584,10 @@ public class NewJFrame extends javax.swing.JFrame {
          items.add(x);
          }
      }
-     item.saveItemsToFile(items);}
+     item.saveItemsToFile(items);
+                        JOptionPane.showMessageDialog(null, "saved to file successfully", "Alert", JOptionPane.INFORMATION_MESSAGE);        
+
+                     }
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
@@ -616,7 +625,10 @@ public class NewJFrame extends javax.swing.JFrame {
          invoiceDate.setText(date);
          customerName.setText(clientName);
          invoiceTotalPrice.setText(total);
+         
          selectedInvoiceItems(index);
+         
+        
         
     }//GEN-LAST:event_invoicesTableMouseClicked
 
