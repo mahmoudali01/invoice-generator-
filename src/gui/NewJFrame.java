@@ -7,6 +7,8 @@ package gui;
 import invoicedesktop.invoice;
 import invoicedesktop.invoiceItem;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -83,9 +85,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         addingItem = new javax.swing.JButton();
         canelAddItem = new javax.swing.JButton();
-        setItemPrice = new javax.swing.JFormattedTextField();
-        setItemCount = new javax.swing.JFormattedTextField();
-        setItemName = new javax.swing.JFormattedTextField();
+        setItemName = new javax.swing.JTextField();
+        setItemPrice = new javax.swing.JTextField();
+        setItemCount = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         invoicesTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -137,51 +139,57 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         try {
-            setClientName.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**************************")));
+            setClientName.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("****************************")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        setInvoiceDate.setDateFormatString("yyyy-MM-dd");
-        setInvoiceDate.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
+        setClientName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                setClientNameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                setClientNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                setClientNameKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout addInvoiceDialogLayout = new javax.swing.GroupLayout(addInvoiceDialog.getContentPane());
         addInvoiceDialog.getContentPane().setLayout(addInvoiceDialogLayout);
         addInvoiceDialogLayout.setHorizontalGroup(
             addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addInvoiceDialogLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
                 .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
                         .addComponent(submitAddingInvoice)
                         .addGap(61, 61, 61)
                         .addComponent(cancelAddInvoice))
                     .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
                         .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(setClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                                .addComponent(setInvoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(4, 4, 4)))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(setClientName, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                .addComponent(setInvoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         addInvoiceDialogLayout.setVerticalGroup(
             addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addInvoiceDialogLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(setInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(addInvoiceDialogLayout.createSequentialGroup()
+                        .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(setInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(setClientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,7 +197,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitAddingInvoice)
                     .addComponent(cancelAddInvoice))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         addItemDialog.setSize(new java.awt.Dimension(370, 350));
@@ -214,9 +222,26 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        setItemName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                setItemNameKeyTyped(evt);
+            }
+        });
+
         setItemPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setItemPriceActionPerformed(evt);
+            }
+        });
+        setItemPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                setItemPriceKeyTyped(evt);
+            }
+        });
+
+        setItemCount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                setItemCountKeyTyped(evt);
             }
         });
 
@@ -232,34 +257,34 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(76, 76, 76)
+                        .addGap(55, 55, 55)
                         .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(setItemPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(setItemCount)
-                            .addComponent(setItemName)))
+                            .addComponent(setItemPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(setItemName)
+                            .addComponent(setItemCount)))
                     .addGroup(addItemDialogLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(addingItem)
                         .addGap(40, 40, 40)
                         .addComponent(canelAddItem)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         addItemDialogLayout.setVerticalGroup(
             addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addItemDialogLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(64, 64, 64)
+                .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(setItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(36, 36, 36)
                 .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(setItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(35, 35, 35)
+                .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(setItemCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(addItemDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addingItem)
                     .addComponent(canelAddItem))
@@ -606,15 +631,18 @@ void creatingInvoice(String date,String clientName){
  
 
        if(  date.equals("") || clientName.equals("")){
-         JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);        
+         JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);  
+           setInvoiceDate.setCalendar(null);
+                 setClientName.setText("");
        }else if(date.equals("") && clientName.equals("")){
-         JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);        
+         JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);   
+           setInvoiceDate.setCalendar(null);
+                 setClientName.setText("");
           }
        else if(!date.equals("") &&!clientName.equals("")){
            ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
            int size  =allInvoices.size();
            size++;
-
            invoice newIn =new invoice(size,date,clientName);
            newIn.setInvoiceItems(items);        
            allInvoices.add(newIn);
@@ -627,7 +655,12 @@ void creatingInvoice(String date,String clientName){
                  rowData[2] = String.valueOf(newIn.getClientName());
                  rowData[3] = String.valueOf(newIn.getItemsTotalPrice());
                  invoiceModel.addRow(rowData);
-                 addInvoiceDialog.setVisible(false);
+                addInvoiceDialog.setVisible(false);
+
+                 setInvoiceDate.setCalendar(null);
+                 setClientName.setText("");
+                 
+
     }
 }
     private void submitAddingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAddingInvoiceActionPerformed
@@ -635,7 +668,7 @@ void creatingInvoice(String date,String clientName){
          String clientName,date;
           SimpleDateFormat sdf =  new SimpleDateFormat("d/M/yyyy");
           if(setInvoiceDate.getDate() == null){
-              date =null;
+              date ="";
            }
               
         else{
@@ -647,10 +680,8 @@ void creatingInvoice(String date,String clientName){
 
         clientName =setClientName.getText();
                
-                creatingInvoice(date,clientName);
-               setInvoiceDate.setCalendar(null);
-                 setClientName.setText("");
-
+        creatingInvoice(date,clientName);
+               
 
     }//GEN-LAST:event_submitAddingInvoiceActionPerformed
 void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
@@ -682,6 +713,11 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                  String pr = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
                  invoiceTotalPrice.setText(pr);
                  invoiceModel.setValueAt(pr,index,3);
+                addItemDialog.setVisible(false);
+                 setItemName.setText("");
+                 setItemCount.setText("");
+                 setItemPrice.setText("");
+
             
     }
 
@@ -708,10 +744,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
 
                
                 addItemToInvoice(itemName,itemCount,itemPrice);
-                 setItemName.setText("");
-                 setItemCount.setText("");
-                 setItemPrice.setText("");
-                 addItemDialog.setVisible(false);
+                
 
     }//GEN-LAST:event_addingItemActionPerformed
 
@@ -768,17 +801,88 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private void canelAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelAddItemActionPerformed
         // TODO add your handling code here:
         addItemDialog.setVisible(false);
+        setItemName.setText("");
+        setItemPrice.setText("");
+        setItemCount.setText("");
+
         
     }//GEN-LAST:event_canelAddItemActionPerformed
 
     private void cancelAddInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddInvoiceActionPerformed
         // TODO add your handling code here:
                 addInvoiceDialog.setVisible(false);
+                        setClientName.setText("");
+                        setInvoiceDate.setDate(null);
+
+                
     }//GEN-LAST:event_cancelAddInvoiceActionPerformed
+
+    private void setClientNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setClientNameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setClientNameKeyPressed
+
+    private void setClientNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setClientNameKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setClientNameKeyReleased
+
+    private void setClientNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setClientNameKeyTyped
+        // TODO add your handling code here:
+         setClientName.addKeyListener(new KeyAdapter() {
+         public void keyTyped(KeyEvent e) {
+             char c = e.getKeyChar();
+             if(!(Character.isAlphabetic(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE )) {
+                 e.consume();  // ignore the event if it's not an alphabet
+             }
+         }
+      });
+      
+    }//GEN-LAST:event_setClientNameKeyTyped
 
     private void setItemPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setItemPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_setItemPriceActionPerformed
+
+    private void setItemNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setItemNameKeyTyped
+        // TODO add your handling code here:
+         setItemName.addKeyListener(new KeyAdapter() {
+         public void keyTyped(KeyEvent e) {
+             char c = e.getKeyChar();
+             if(!(Character.isAlphabetic(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE )) {
+                 e.consume();  // ignore the event if it's not an alphabet
+             }
+         }
+      });
+    }//GEN-LAST:event_setItemNameKeyTyped
+
+    private void setItemCountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setItemCountKeyTyped
+        // TODO add your handling code here:
+         setItemCount.addKeyListener(new KeyAdapter() {
+    public void keyTyped(KeyEvent e) {
+      char c = e.getKeyChar();
+      if (!((c >= '0') && (c <= '9') ||
+         (c == KeyEvent.VK_BACK_SPACE) ||
+         (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        e.consume();
+      }
+    }
+  });
+    }//GEN-LAST:event_setItemCountKeyTyped
+
+    private void setItemPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_setItemPriceKeyTyped
+        // TODO add your handling code here:
+           setItemPrice.addKeyListener(new KeyAdapter() {
+    public void keyTyped(KeyEvent e) {
+      char c = e.getKeyChar();
+      if (!((c >= '0') && (c <= '9') ||
+         (c == KeyEvent.VK_BACK_SPACE) ||
+         (c == KeyEvent.VK_DELETE))||e.getKeyChar() == '.') {
+        getToolkit().beep();
+        e.consume();
+      }
+    }
+  });
+    }//GEN-LAST:event_setItemPriceKeyTyped
 
     /**
      * @param args the command line arguments
@@ -853,9 +957,9 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JMenuItem saveFile;
     private javax.swing.JFormattedTextField setClientName;
     private com.toedter.calendar.JDateChooser setInvoiceDate;
-    private javax.swing.JFormattedTextField setItemCount;
-    private javax.swing.JFormattedTextField setItemName;
-    private javax.swing.JFormattedTextField setItemPrice;
+    private javax.swing.JTextField setItemCount;
+    private javax.swing.JTextField setItemName;
+    private javax.swing.JTextField setItemPrice;
     private javax.swing.JButton submitAddingInvoice;
     // End of variables declaration//GEN-END:variables
 }
