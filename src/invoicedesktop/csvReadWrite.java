@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +57,7 @@ public class csvReadWrite {
                 String Line = csvReader.nextLine();
                 String[] seprated = Line.split(",");
                 invoice.setInvoiceNO(Integer.parseInt(seprated[0]));
+
                 invoice.setDate(seprated[1]);
                 invoice.setClientName(seprated[2]);
                 Scanner  reader = new Scanner(new File(line));
@@ -88,12 +90,7 @@ public class csvReadWrite {
 
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
-        }finally {
-            //csvReader.close();
-            //reader.close();
-
         }
-
         return null;
     }
 }
