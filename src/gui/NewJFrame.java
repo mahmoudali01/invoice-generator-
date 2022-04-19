@@ -27,7 +27,7 @@ import javax.swing.table.TableModel;
  class MyCustomFilter extends javax.swing.filechooser.FileFilter {
         @Override
         public boolean accept(File file) {
-            return file.isDirectory() || file.getAbsolutePath().endsWith(".csv");
+            return file.isDirectory() || file.getAbsolutePath().endsWith(".csv") ;
         }
         @Override
         public String getDescription() {
@@ -524,28 +524,40 @@ public class NewJFrame extends javax.swing.JFrame {
    }
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
         // TODO add your handling code here:
-    JOptionPane.showMessageDialog(null, "<select the  invoice file>", "Alert", JOptionPane.QUESTION_MESSAGE);        
+        
+    JOptionPane.showMessageDialog(null, "select the  invoice header file", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-         headerFile = fileChooser.getSelectedFile();
-//         JOptionPane.showMessageDialog(null, "<the invoice file added successfully.>", "Alert", JOptionPane.INFORMATION_MESSAGE);        
-         JOptionPane.showMessageDialog(null, "<select the  invoice items file>", "Alert", JOptionPane.QUESTION_MESSAGE);        
+                            headerFile = fileChooser.getSelectedFile();
+
+            if(headerFile.getAbsolutePath().contains("InvoiceHeader")){
+                
+         JOptionPane.showMessageDialog(null, "select the  invoice items file", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
               int returnVa =  fileChooser.showOpenDialog(this);
               if (returnVa == JFileChooser.APPROVE_OPTION) {
+              headerLine = fileChooser.getSelectedFile();
 
-//                JOptionPane.showMessageDialog(null, "<the invoice items file added successfully.>", "Alert", JOptionPane.INFORMATION_MESSAGE);        
-
-                          headerLine = fileChooser.getSelectedFile();
+            if(headerLine.getAbsolutePath().contains("InvoiceLine")){
                       showInvoices(headerFile.getAbsolutePath(),headerLine.getAbsolutePath());
-                      System.out.println(headerFile.getAbsoluteFile());
                        
                      }
-               
+            else{
+                        JOptionPane.showMessageDialog(null, "must  select inoice line file", "Alert", JOptionPane.ERROR_MESSAGE);        
 
-    } else {
-        System.out.println("no file chosen");
+            }
+              }
+            }
+     
+               
+      else{
+             JOptionPane.showMessageDialog(null, "must select the invoice header file", "Alert", JOptionPane.ERROR_MESSAGE);        
+
+       }
+    }
+        else {
+             JOptionPane.showMessageDialog(null, "no file was chosen", "Alert", JOptionPane.QUESTION_MESSAGE);        
     }
         
     }//GEN-LAST:event_loadActionPerformed
