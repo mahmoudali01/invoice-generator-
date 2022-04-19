@@ -305,24 +305,33 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="338" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="invoiceTotalLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="customerNameLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="invoiceDateLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="invoiceNumberLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="customerName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="invoiceTotalPrice" alignment="0" pref="155" max="32767" attributes="0"/>
-                          <Component id="invoiceNumber" max="32767" attributes="0"/>
-                          <Component id="invoiceDate" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="invoiceTotalPrice" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <Component id="invoiceNumber" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="customerName" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <Component id="invoiceDate" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="338" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -355,9 +364,9 @@
                           <Component id="invoiceDate" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="customerName" max="32767" attributes="0"/>
-                          <Component id="customerNameLabel" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="customerNameLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="customerName" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -480,7 +489,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="invoiceDateLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="invoice date"/>
+        <Property name="text" type="java.lang.String" value="invoice date (dd/mm/yyyy)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="customerNameLabel">
@@ -500,6 +509,10 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerNameMouseReleased"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="createInvoiceButton">
       <Properties>
@@ -531,6 +544,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteItemButtonActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="deleteItemButtonKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="invoiceNumber">
@@ -552,13 +566,16 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="invoiceDate">
+    <Component class="javax.swing.JFormattedTextField" name="invoiceDate">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="invoiceDateMouseReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

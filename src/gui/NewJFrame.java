@@ -103,7 +103,7 @@ public class NewJFrame extends javax.swing.JFrame {
         deleteItemButton = new javax.swing.JButton();
         invoiceNumber = new javax.swing.JTextField();
         invoiceTotalPrice = new javax.swing.JTextField();
-        invoiceDate = new javax.swing.JTextField();
+        invoiceDate = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadFile = new javax.swing.JMenu();
         load = new javax.swing.JMenuItem();
@@ -329,7 +329,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     invoiceNumberLabel.setText("invoice number");
 
-    invoiceDateLabel.setText("invoice date");
+    invoiceDateLabel.setText("invoice date (dd/mm/yyyy)");
 
     customerNameLabel.setText("customer name");
 
@@ -337,6 +337,16 @@ public class NewJFrame extends javax.swing.JFrame {
 
     customerName.setEditable(false);
     customerName.setBackground(new java.awt.Color(204, 204, 204));
+    customerName.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            customerNameMouseReleased(evt);
+        }
+    });
+    customerName.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            customerNameActionPerformed(evt);
+        }
+    });
 
     createInvoiceButton.setText("create invoice");
     createInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -365,6 +375,11 @@ public class NewJFrame extends javax.swing.JFrame {
             deleteItemButtonActionPerformed(evt);
         }
     });
+    deleteItemButton.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            deleteItemButtonKeyReleased(evt);
+        }
+    });
 
     invoiceNumber.setEditable(false);
     invoiceNumber.setBackground(new java.awt.Color(204, 204, 204));
@@ -379,6 +394,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     invoiceDate.setEditable(false);
     invoiceDate.setBackground(new java.awt.Color(204, 204, 204));
+    invoiceDate.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            invoiceDateMouseReleased(evt);
+        }
+    });
 
     loadFile.setText("File");
     loadFile.addActionListener(new java.awt.event.ActionListener() {
@@ -417,21 +437,26 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(invoiceDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(invoiceNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(customerName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                        .addComponent(invoiceNumber)
-                        .addComponent(invoiceDate))
-                    .addGap(111, 111, 111))
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(29, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(invoiceTotalPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoiceNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(42, 42, 42)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(customerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoiceDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGap(63, 63, 63))))
         .addGroup(layout.createSequentialGroup()
             .addGap(38, 38, 38)
             .addComponent(createInvoiceButton)
@@ -457,9 +482,9 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(invoiceDateLabel)
                         .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(customerName)
-                        .addComponent(customerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(customerNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(customerName))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(invoiceTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,14 +539,14 @@ public class NewJFrame extends javax.swing.JFrame {
        
         invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
        invoiceItemModel.setRowCount(0);
-try{
+      try{
             Object []rowData =new Object[4];
                 for (int i = 0; i <= allItems.get(index).size(); i++)
                {
-                rowData[0] = String.valueOf(allItems.get(index).get(i).getItemName());
-                 rowData[1] = String.valueOf(allItems.get(index).get(i).getItemPrice());
-                  rowData[2] = String.valueOf(allItems.get(index).get(i).getItemCount());
-                rowData[3] = String.valueOf(allItems.get(index).get(i).calTotalItemPrice());
+                   rowData[0] = String.valueOf(allItems.get(index).get(i).getItemName());
+                   rowData[1] = String.valueOf(allItems.get(index).get(i).getItemPrice());
+                   rowData[2] = String.valueOf(allItems.get(index).get(i).getItemCount());
+                   rowData[3] = String.valueOf(allItems.get(index).get(i).calTotalItemPrice());
               invoiceItemModel.addRow(rowData);
         }}catch(Exception e){
         System.out.println("inoice has no added items yet");
@@ -596,11 +621,11 @@ try{
 
     private void invoicesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoicesTableMouseClicked
         // TODO add your handling code here:
-//             invoiceDate.setEnabled(true);
-//
-//             invoiceDate.setBackground(Color.WHITE);
-//             customerName.setEditable(true);
-//             customerName.setBackground(Color.WHITE);
+             invoiceDate.setEditable(true);
+
+             invoiceDate.setBackground(Color.WHITE);
+             customerName.setEditable(true);
+             customerName.setBackground(Color.WHITE);
 
               
         int index = invoicesTable.getSelectedRow();
@@ -918,6 +943,41 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
   });
     }//GEN-LAST:event_setItemPriceKeyTyped
 
+    private void deleteItemButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deleteItemButtonKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteItemButtonKeyReleased
+
+    private void customerNameMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerNameMouseReleased
+        // TODO add your handling code here:
+           invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+
+           String name = customerName.getText();
+        //   String name = customerName.getText();
+           int index = invoicesTable.getSelectedRow();
+           allInvoices.get(index).setClientName(name);
+                    //  allInvoices.get(index).setDate(name);
+                                          invoiceModel.setValueAt(name,index,2);
+
+
+    }//GEN-LAST:event_customerNameMouseReleased
+
+    private void customerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerNameActionPerformed
+
+    private void invoiceDateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceDateMouseReleased
+        // TODO add your handling code here:
+          invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+
+           String date = invoiceDate.getText();
+        //   String name = customerName.getText();
+           int index = invoicesTable.getSelectedRow();
+           allInvoices.get(index).setClientName(date);
+                    //  allInvoices.get(index).setDate(name);
+                                          invoiceModel.setValueAt(date,index,1);
+
+    }//GEN-LAST:event_invoiceDateMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -970,7 +1030,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JButton deleteInvoiceButton;
     private javax.swing.JButton deleteItemButton;
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JTextField invoiceDate;
+    private javax.swing.JFormattedTextField invoiceDate;
     private javax.swing.JLabel invoiceDateLabel;
     private javax.swing.JTable invoiceItemsTable;
     private javax.swing.JTextField invoiceNumber;
