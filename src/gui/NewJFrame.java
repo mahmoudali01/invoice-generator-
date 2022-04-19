@@ -136,6 +136,12 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        try {
+            setClientName.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         setInvoiceDate.setDateFormatString("yyyy-MM-dd");
         setInvoiceDate.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
 
@@ -521,6 +527,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
                      // TODO add your handling code here:
+                     
+                     if(allInvoices.isEmpty()){                               
+                   JOptionPane.showMessageDialog(null, "no invoices to save", "Alert", JOptionPane.QUESTION_MESSAGE);        
+
+                     }
+                     else{
      item.setInvoice(in);
      in.saveInvoiceToFile(allInvoices);
      ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
@@ -529,7 +541,7 @@ public class NewJFrame extends javax.swing.JFrame {
          items.add(x);
          }
      }
-     item.saveItemsToFile(items);
+     item.saveItemsToFile(items);}
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
