@@ -14,6 +14,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -347,6 +350,11 @@ public class NewJFrame extends javax.swing.JFrame {
             customerNameActionPerformed(evt);
         }
     });
+    customerName.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            customerNameKeyReleased(evt);
+        }
+    });
 
     createInvoiceButton.setText("create invoice");
     createInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -397,6 +405,11 @@ public class NewJFrame extends javax.swing.JFrame {
     invoiceDate.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             invoiceDateMouseReleased(evt);
+        }
+    });
+    invoiceDate.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            invoiceDateKeyReleased(evt);
         }
     });
 
@@ -949,7 +962,37 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
 
     private void customerNameMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerNameMouseReleased
         // TODO add your handling code here:
-           invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+         
+    }//GEN-LAST:event_customerNameMouseReleased
+
+    private void customerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerNameActionPerformed
+
+    private void invoiceDateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceDateMouseReleased
+        // TODO add your handling code here:
+
+          
+          
+
+    }//GEN-LAST:event_invoiceDateMouseReleased
+
+    private void invoiceDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_invoiceDateKeyReleased
+        // TODO add your handling code here:
+        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+           String date = invoiceDate.getText();
+
+
+         int index = invoicesTable.getSelectedRow();
+           allInvoices.get(index).setClientName(date);
+                    //  allInvoices.get(index).setDate(name);
+                 invoiceModel.setValueAt(date,index,1);
+    
+    }//GEN-LAST:event_invoiceDateKeyReleased
+
+    private void customerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerNameKeyReleased
+        // TODO add your handling code here:
+          invoiceModel = (DefaultTableModel) invoicesTable.getModel();
 
            String name = customerName.getText();
         //   String name = customerName.getText();
@@ -959,24 +1002,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                                           invoiceModel.setValueAt(name,index,2);
 
 
-    }//GEN-LAST:event_customerNameMouseReleased
-
-    private void customerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customerNameActionPerformed
-
-    private void invoiceDateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceDateMouseReleased
-        // TODO add your handling code here:
-          invoiceModel = (DefaultTableModel) invoicesTable.getModel();
-
-           String date = invoiceDate.getText();
-        //   String name = customerName.getText();
-           int index = invoicesTable.getSelectedRow();
-           allInvoices.get(index).setClientName(date);
-                    //  allInvoices.get(index).setDate(name);
-                                          invoiceModel.setValueAt(date,index,1);
-
-    }//GEN-LAST:event_invoiceDateMouseReleased
+    }//GEN-LAST:event_customerNameKeyReleased
 
     /**
      * @param args the command line arguments
