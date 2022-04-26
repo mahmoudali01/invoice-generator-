@@ -1,1 +1,2 @@
+//HOW TO ADD JCALENDAR COMPONENT TO NETBEANS IDE PALETTE
 http://www.aziosworld.com/2017/03/how-to-add-jcalendar-component-to.html
