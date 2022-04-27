@@ -81,7 +81,7 @@ public class NewJFrame extends javax.swing.JFrame {
         submitAddingInvoice = new javax.swing.JButton();
         cancelAddInvoice = new javax.swing.JButton();
         setClientName = new javax.swing.JFormattedTextField();
-        setInvoiceDate = new com.toedter.calendar.JDateChooser();
+        setInvoiceDate = new javax.swing.JFormattedTextField();
         addItemDialog = new javax.swing.JDialog();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -119,11 +119,11 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         addInvoiceDialog.setBounds(new java.awt.Rectangle(0, 0, 300, 300));
-        addInvoiceDialog.setSize(new java.awt.Dimension(400, 400));
+        addInvoiceDialog.setSize(new java.awt.Dimension(500, 400));
 
         addInvoieHeadLabel.setText("enter data for the new invoice");
 
-        jLabel2.setText("enter invoice date");
+        jLabel2.setText("enter invoice date (d/m/yyyy)");
 
         jLabel3.setText("enter client name");
 
@@ -158,49 +158,54 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        setInvoiceDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yyyy"))));
+
         javax.swing.GroupLayout addInvoiceDialogLayout = new javax.swing.GroupLayout(addInvoiceDialog.getContentPane());
         addInvoiceDialog.getContentPane().setLayout(addInvoiceDialogLayout);
         addInvoiceDialogLayout.setHorizontalGroup(
             addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addInvoiceDialogLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addComponent(submitAddingInvoice)
-                        .addGap(61, 61, 61)
-                        .addComponent(cancelAddInvoice))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78))
                     .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(setClientName, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                .addComponent(setInvoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
+                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(setClientName, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(setInvoiceDate))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addInvoiceDialogLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(submitAddingInvoice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelAddInvoice)
+                .addGap(109, 109, 109))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addInvoiceDialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140))
         );
         addInvoiceDialogLayout.setVerticalGroup(
             addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(addInvoiceDialogLayout.createSequentialGroup()
-                        .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(setInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(addInvoieHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(setClientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(61, 61, 61)
                 .addGroup(addInvoiceDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitAddingInvoice)
                     .addComponent(cancelAddInvoice))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         addItemDialog.setSize(new java.awt.Dimension(370, 350));
@@ -566,10 +571,8 @@ public class NewJFrame extends javax.swing.JFrame {
         }
 
    }
-    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
-        // TODO add your handling code here:
-        
-    JOptionPane.showMessageDialog(null, "select the  invoice header file", "Alert", JOptionPane.QUESTION_MESSAGE);        
+    void loadFile(){
+     JOptionPane.showMessageDialog(null, "select the  invoice header file", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -585,10 +588,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
             if(headerLine.getAbsolutePath().contains("InvoiceLine")){
                       showInvoices(headerFile.getAbsolutePath(),headerLine.getAbsolutePath());
+                      load.setEnabled(false);
                        
                      }
             else{
-                        JOptionPane.showMessageDialog(null, "must  select inoice line file", "Alert", JOptionPane.ERROR_MESSAGE);        
+                        JOptionPane.showMessageDialog(null, "must  select invoice line file", "Alert", JOptionPane.ERROR_MESSAGE);        
 
             }
               }
@@ -604,12 +608,14 @@ public class NewJFrame extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "no file was chosen", "Alert", JOptionPane.QUESTION_MESSAGE);        
     }
         
+    }
+    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
+        // TODO add your handling code here:
+        
+     loadFile();
     }//GEN-LAST:event_loadActionPerformed
-
-    private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
-                     // TODO add your handling code here:
-                     
-                     if(allInvoices.isEmpty()){                               
+  void saveToFile(){
+              if(allInvoices.isEmpty()){                               
                    JOptionPane.showMessageDialog(null, "no invoices to save", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
                      }
@@ -626,6 +632,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "saved to file successfully", "Alert", JOptionPane.INFORMATION_MESSAGE);        
 
                      }
+  }
+    private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
+                     // TODO add your handling code here:
+                     saveToFile();
+                     
+             
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
@@ -692,19 +704,18 @@ void creatingInvoice(String date,String clientName){
        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
  
 
-       if(  date.equals("") || clientName.equals("")){
+       if( date.equals("") || clientName.equals("")){
          JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);  
-           setInvoiceDate.setCalendar(null);
+           setInvoiceDate.setText("");
                  setClientName.setText("");
        }else if(date.equals("") && clientName.equals("")){
          JOptionPane.showMessageDialog(null, "you must enter values for date and name", "Alert", JOptionPane.QUESTION_MESSAGE);   
-           setInvoiceDate.setCalendar(null);
+           setInvoiceDate.setText("");
                  setClientName.setText("");
           }
        else if(!date.equals("") &&!clientName.equals("")){
            ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
-           int size  =allInvoices.size();
-           size++;
+           int size  =allInvoices.size() + 1;
            invoice newIn =new invoice(size,date,clientName);
            newIn.setInvoiceItems(items);        
            allInvoices.add(newIn);
@@ -719,7 +730,7 @@ void creatingInvoice(String date,String clientName){
                  invoiceModel.addRow(rowData);
                 addInvoiceDialog.setVisible(false);
 
-                 setInvoiceDate.setCalendar(null);
+                 setInvoiceDate.setText("");
                  setClientName.setText("");
                  
 
@@ -727,21 +738,22 @@ void creatingInvoice(String date,String clientName){
 }
     private void submitAddingInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAddingInvoiceActionPerformed
         // TODO add your handling code here:
-         String clientName,date;
-          SimpleDateFormat sdf =  new SimpleDateFormat("d/M/yyyy");
-          if(setInvoiceDate.getDate() == null){
-              date ="";
-           }
+         String clientName,date = "";
+       //   SimpleDateFormat sdf =  new SimpleDateFormat("dd/MM/yyyy");
+//          if(setInvoiceDate.getText() == null){
+//              date ="";
+//           }
               
-        else{
-           date = sdf.format(setInvoiceDate.getDate());
+       // else{
+//       if(!setInvoiceDate.getText().equals(""))
+//           date = sdf.format(setInvoiceDate.getText());
           // System.out.println(date);
-         }
+      //   }
        
         //    date = setInvoiceDate.getDate();
 
         clientName =setClientName.getText();
-               
+        date =setInvoiceDate.getText();       
         creatingInvoice(date,clientName);
                
 
@@ -882,7 +894,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
         // TODO add your handling code here:
                 addInvoiceDialog.setVisible(false);
                         setClientName.setText("");
-                        setInvoiceDate.setDate(null);
+                        setInvoiceDate.setText("");
 
                 
     }//GEN-LAST:event_cancelAddInvoiceActionPerformed
@@ -1076,7 +1088,7 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
     private javax.swing.JMenu loadFile;
     private javax.swing.JMenuItem saveFile;
     private javax.swing.JFormattedTextField setClientName;
-    private com.toedter.calendar.JDateChooser setInvoiceDate;
+    private javax.swing.JFormattedTextField setInvoiceDate;
     private javax.swing.JTextField setItemCount;
     private javax.swing.JTextField setItemName;
     private javax.swing.JTextField setItemPrice;
