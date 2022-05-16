@@ -9,16 +9,19 @@ import java.util.ArrayList;
 
 public class main {
     public static void main(String []args){
-    
-    
-    
-    
-    ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
+
+
+        String invoiceHeader = System.getProperty("user.dir") + "\\src\\csv\\InvoiceHeader.csv";
+        String invoiceLine = System.getProperty("user.dir") + "\\src\\csv\\InvoiceLine.csv";
+
+
+
+        ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
         ArrayList<invoice> allInvoices = new ArrayList<invoice>();
     invoice in =new invoice();
     in.setInvoiceItems(items);
-    in.setInvoiceHeader("C:\\Users\\IT\\Documents\\NetBeansProjects\\invoice-generator-\\src\\csv\\InvoiceHeader.csv");
-    in.setInvoiceLine("C:\\Users\\IT\\Documents\\NetBeansProjects\\invoice-generator-\\src\\csv\\InvoiceLine.csv");
+    in.setInvoiceHeader(invoiceHeader);
+    in.setInvoiceLine(invoiceLine);
      allInvoices =in.returnAllInvoices();
     for(invoice x :allInvoices){
     System.out.println("the invoice head:  "+x.toString());
