@@ -159,6 +159,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         setInvoiceDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yyyy"))));
+        setInvoiceDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setInvoiceDateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addInvoiceDialogLayout = new javax.swing.GroupLayout(addInvoiceDialog.getContentPane());
         addInvoiceDialog.getContentPane().setLayout(addInvoiceDialogLayout);
@@ -1015,6 +1020,10 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
 
 
     }//GEN-LAST:event_customerNameKeyReleased
+
+    private void setInvoiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setInvoiceDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setInvoiceDateActionPerformed
 
     /**
      * @param args the command line arguments

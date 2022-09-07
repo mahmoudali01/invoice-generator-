@@ -134,6 +134,9 @@
               <Format format="d/M/yyyy" subtype="-1" type="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setInvoiceDateActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
