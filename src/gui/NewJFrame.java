@@ -4,6 +4,7 @@
  */
 package gui;
 
+import invoiceController.invoiceController;
 import invoicedesktop.invoice;
 import invoicedesktop.invoiceItem;
 import java.awt.Color;
@@ -42,14 +43,14 @@ import javax.swing.table.TableModel;
 public class NewJFrame extends javax.swing.JFrame {
            File   headerFile = new File("/");
             File headerLine = new File("/");
-               ArrayList<invoice> allInvoices = new ArrayList<invoice>();
-               ArrayList<ArrayList<invoiceItem>> allItems =new ArrayList<ArrayList<invoiceItem>>();
+//               ArrayList<invoice> allInvoices = new ArrayList<invoice>();
+//               ArrayList<ArrayList<invoiceItem>> allItems =new ArrayList<ArrayList<invoiceItem>>();
 //               ArrayList<ArrayList<invoiceItem>> allItemsTemp =new ArrayList<ArrayList<invoiceItem>>();
 //                              ArrayList<invoice> allInvoicesTemp =new ArrayList<invoice>();
+invoiceController cr = new invoiceController();
 
-
-               invoice in =new invoice();
-               invoiceItem item =new invoiceItem();
+//               invoice in =new invoice();
+//               invoiceItem item =new invoiceItem();
                
         DefaultTableModel invoiceModel;
         DefaultTableModel invoiceItemModel;
@@ -527,55 +528,55 @@ public class NewJFrame extends javax.swing.JFrame {
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
-   private void showInvoices(String header ,String line){
-       try{
-        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
-                         in.setInvoiceHeader(header);
-                        in.setInvoiceLine(line);
-                        allInvoices =in.returnAllInvoices();
-                        for(invoice x: allInvoices){
-                        allItems.add(x.getInvoiceItems());
-                        }
-                       
-               Object []rowData =new Object[4];
-                for (int i = 0; i <= allInvoices.size(); i++)
-             {
-          //                 Date date = null;
-           //            try {  
-          //                 date=new SimpleDateFormat("dd/MM/yyyy").parse(allInvoices.get(i).getDate());
-         //            } catch (ParseException ex) {
-          //                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-          //            }
-
-                rowData[0] = String.valueOf(allInvoices.get(i).getInvoiceNO());
-                 rowData[1] = String.valueOf(allInvoices.get(i).getDate());
-                  rowData[2] = String.valueOf(allInvoices.get(i).getClientName());
-                rowData[3] = String.valueOf(allInvoices.get(i).getItemsTotalPrice());
-              invoiceModel.addRow(rowData);
-              }}catch(Exception e){
-              System.out.println("some invoices has no items yet");
-              }
-
-    }
+//   private void showInvoices(String header ,String line){
+//       try{
+//        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+//                         in.setInvoiceHeader(header);
+//                        in.setInvoiceLine(line);
+//                        allInvoices =in.returnAllInvoices();
+//                        for(invoice x: allInvoices){
+//                        allItems.add(x.getInvoiceItems());
+//                        }
+//                       
+//               Object []rowData =new Object[4];
+//                for (int i = 0; i <= allInvoices.size(); i++)
+//             {
+//          //                 Date date = null;
+//           //            try {  
+//          //                 date=new SimpleDateFormat("dd/MM/yyyy").parse(allInvoices.get(i).getDate());
+//         //            } catch (ParseException ex) {
+//          //                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+//          //            }
+//
+//                rowData[0] = String.valueOf(allInvoices.get(i).getInvoiceNO());
+//                 rowData[1] = String.valueOf(allInvoices.get(i).getDate());
+//                  rowData[2] = String.valueOf(allInvoices.get(i).getClientName());
+//                rowData[3] = String.valueOf(allInvoices.get(i).getItemsTotalPrice());
+//              invoiceModel.addRow(rowData);
+//              }}catch(Exception e){
+//              System.out.println("some invoices has no items yet");
+//              }
+//
+//    }
   
-    void selectedInvoiceItems(int index){
-       
-        invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
-       invoiceItemModel.setRowCount(0);
-      try{
-            Object []rowData =new Object[4];
-                for (int i = 0; i <= allItems.get(index).size(); i++)
-               {
-                   rowData[0] = String.valueOf(allItems.get(index).get(i).getItemName());
-                   rowData[1] = String.valueOf(allItems.get(index).get(i).getItemPrice());
-                   rowData[2] = String.valueOf(allItems.get(index).get(i).getItemCount());
-                   rowData[3] = String.valueOf(allItems.get(index).get(i).calTotalItemPrice());
-              invoiceItemModel.addRow(rowData);
-        }}catch(Exception e){
-        System.out.println("inoice has no added items yet");
-        }
-
-   }
+//    void selectedInvoiceItems(int index){
+//       
+//        invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+//       invoiceItemModel.setRowCount(0);
+//      try{
+//            Object []rowData =new Object[4];
+//                for (int i = 0; i <= allItems.get(index).size(); i++)
+//               {
+//                   rowData[0] = String.valueOf(allItems.get(index).get(i).getItemName());
+//                   rowData[1] = String.valueOf(allItems.get(index).get(i).getItemPrice());
+//                   rowData[2] = String.valueOf(allItems.get(index).get(i).getItemCount());
+//                   rowData[3] = String.valueOf(allItems.get(index).get(i).calTotalItemPrice());
+//              invoiceItemModel.addRow(rowData);
+//        }}catch(Exception e){
+//        System.out.println("invoice has no added items yet");
+//        }
+//
+//   }
     void loadFile(){
      JOptionPane.showMessageDialog(null, "select the  invoice header file", "Alert", JOptionPane.QUESTION_MESSAGE);        
 
@@ -592,7 +593,15 @@ public class NewJFrame extends javax.swing.JFrame {
               headerLine = fileChooser.getSelectedFile();
 
             if(headerLine.getAbsolutePath().contains("InvoiceLine")){
-                      showInvoices(headerFile.getAbsolutePath(),headerLine.getAbsolutePath());
+                                                invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+
+                            Object [][]arr = cr.showInvoices(headerFile.getAbsolutePath(),headerLine.getAbsolutePath());
+                            for(int i =0 ; i<arr.length;i++){
+                                
+                                invoiceModel.addRow(arr[i]);
+                            }
+
+
                       load.setEnabled(false);
                        
                      }
@@ -620,23 +629,15 @@ public class NewJFrame extends javax.swing.JFrame {
      loadFile();
     }//GEN-LAST:event_loadActionPerformed
   void saveToFile(){
-              if(allInvoices.isEmpty()){                               
-                   JOptionPane.showMessageDialog(null, "no invoices to save", "Alert", JOptionPane.QUESTION_MESSAGE);        
-
-                     }
-                     else{
-     item.setInvoice(in);
-     in.saveInvoiceToFile(allInvoices);
-     ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
-     for( ArrayList<invoiceItem> itemAsAL:allItems){
-         for(invoiceItem x :itemAsAL){
-         items.add(x);
-         }
-     }
-     item.saveItemsToFile(items);
+//              if(allInvoices.isEmpty()){                               
+//                   JOptionPane.showMessageDialog(null, "no invoices to save", "Alert", JOptionPane.QUESTION_MESSAGE);        
+//
+//                     }
+                   //  else{
+                           cr.saveFile();
                         JOptionPane.showMessageDialog(null, "saved to file successfully", "Alert", JOptionPane.INFORMATION_MESSAGE);        
 
-                     }
+                     //}
   }
     private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
                      // TODO add your handling code here:
@@ -680,8 +681,15 @@ public class NewJFrame extends javax.swing.JFrame {
          invoiceDate.setText(date);
          customerName.setText(clientName);
          invoiceTotalPrice.setText(total);
-         
-         selectedInvoiceItems(index);
+                 invoiceItemModel = (DefaultTableModel) invoiceItemsTable.getModel();
+                 invoiceItemModel.setRowCount(0);
+           Object [][]arr = cr.selectedInvoiceItems(index);
+                            for(int i =0 ; i<arr.length;i++){
+                                
+                                invoiceItemModel.addRow(arr[i]);
+                            }
+
+       //  selectedInvoiceItems(index);
          
         
         
@@ -719,19 +727,10 @@ void creatingInvoice(String date,String clientName){
                  setClientName.setText("");
           }
        else if(!date.equals("") &&!clientName.equals("")){
-           ArrayList<invoiceItem> items = new ArrayList<invoiceItem>();
-           int size  =allInvoices.size() + 1;
-           invoice newIn =new invoice(size,date,clientName);
-           newIn.setInvoiceItems(items);        
-           allInvoices.add(newIn);
-           allItems.add(items);
+           
+                 Object []rowData =cr.createInvoice(date, clientName);
 
-                 Object []rowData =new Object[4];
-
-                 rowData[0] = String.valueOf(newIn.getInvoiceNO());
-                 rowData[1] = String.valueOf(newIn.getDate());
-                 rowData[2] = String.valueOf(newIn.getClientName());
-                 rowData[3] = String.valueOf(newIn.getItemsTotalPrice());
+                
                  invoiceModel.addRow(rowData);
                 addInvoiceDialog.setVisible(false);
 
@@ -777,29 +776,24 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
        else if(!itemName.equals("") &&!itemPrice.equals("")&&!itemCount.equals("")){
                    int index = invoicesTable.getSelectedRow();
                    
-                  try{ int count = Integer.parseInt(itemCount);
-                   double price = Double.parseDouble(itemPrice);
-                                 invoiceItem it =new invoiceItem(itemName,price,count,allInvoices.get(index));
-                                   allItems.get(index).add(it);
+                  try{ 
+                     
 
-                 Object []rowData =new Object[4];
+                 Object []rowData =cr.createInvoiceItem(index, itemName, itemPrice, itemCount);
 
-                 rowData[0] = String.valueOf(it.getItemName());
-                 rowData[1] = String.valueOf(it.getItemPrice());
-                 rowData[2] = String.valueOf(it.getItemCount());
-                 rowData[3] = String.valueOf(it.calTotalItemPrice());
+                 
                  invoiceItemModel.addRow(rowData);
-                  String pr = String.valueOf(allInvoices.get(index).getItemsTotalPrice());
+                  String pr = cr.updateInvoicePrice(index);
                  invoiceTotalPrice.setText(pr);
                  invoiceModel.setValueAt(pr,index,3);
-                addItemDialog.setVisible(false);
+                 addItemDialog.setVisible(false);
                  setItemName.setText("");
                  setItemCount.setText("");
                  setItemPrice.setText("");
 
                   }catch(Exception e){
                                 JOptionPane.showMessageDialog(null, "enter the right values for price and count", "Alert", JOptionPane.ERROR_MESSAGE);        
-
+                                    System.out.print(e.getMessage());
                    }
                       
                  
@@ -845,11 +839,10 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
          JOptionPane.showMessageDialog(null, "must select invoice first", "Alert", JOptionPane.QUESTION_MESSAGE);        
        }
          else{
-                                         int index = invoicesTable.getSelectedRow();
+                            int index = invoicesTable.getSelectedRow();
 
                             invoiceModel.removeRow(index);
-                            allInvoices.remove(index);
-                            allItems.remove(index);
+                            cr.deleteInvoice(index);
                             invoiceItemModel.setRowCount(0);
                             invoiceNumber.setText("");
                             invoiceDate.setText("");
@@ -876,8 +869,10 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
                                          int index = invoiceItemsTable.getSelectedRow();
 
                             invoiceItemModel.removeRow(index);
-                            allItems.get(indexx).remove(index);
-                            String pr = String.valueOf(allInvoices.get(indexx).getItemsTotalPrice());
+                            //allItems.get(indexx).remove(index);
+                            cr.deleteInvoiceItem(indexx, index);
+                            String pr = cr.updateInvoicePrice(indexx);
+//String.valueOf(allInvoices.get(indexx).getItemsTotalPrice());
                             invoiceTotalPrice.setText(pr);
                             invoiceModel.setValueAt(pr,indexx,3);
 
@@ -996,27 +991,27 @@ void addItemToInvoice(String itemName ,String itemPrice,String itemCount){
 
     private void invoiceDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_invoiceDateKeyReleased
         // TODO add your handling code here:
-        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
-           String date = invoiceDate.getText();
-
-
-         int index = invoicesTable.getSelectedRow();
-           allInvoices.get(index).setClientName(date);
-                    //  allInvoices.get(index).setDate(name);
-                 invoiceModel.setValueAt(date,index,1);
+//        invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+//           String date = invoiceDate.getText();
+//
+//
+//         int index = invoicesTable.getSelectedRow();
+//           allInvoices.get(index).setClientName(date);
+//                    //  allInvoices.get(index).setDate(name);
+//                 invoiceModel.setValueAt(date,index,1);
     
     }//GEN-LAST:event_invoiceDateKeyReleased
 
     private void customerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerNameKeyReleased
         // TODO add your handling code here:
-          invoiceModel = (DefaultTableModel) invoicesTable.getModel();
-
-           String name = customerName.getText();
-        //   String name = customerName.getText();
-           int index = invoicesTable.getSelectedRow();
-           allInvoices.get(index).setClientName(name);
-                    //  allInvoices.get(index).setDate(name);
-                                          invoiceModel.setValueAt(name,index,2);
+//          invoiceModel = (DefaultTableModel) invoicesTable.getModel();
+//
+//           String name = customerName.getText();
+//        //   String name = customerName.getText();
+//           int index = invoicesTable.getSelectedRow();
+//           allInvoices.get(index).setClientName(name);
+//                    //  allInvoices.get(index).setDate(name);
+//           invoiceModel.setValueAt(name,index,2);
 
 
     }//GEN-LAST:event_customerNameKeyReleased
